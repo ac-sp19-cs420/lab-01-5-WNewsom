@@ -6,18 +6,27 @@
 //  Copyright © 2019 William D. Newsom. All rights reserved.
 //
 
+/*
+ * The linked list header defines all of the linked list methods, the linked list, and the nodes in the list.
+ */
 #ifndef LinkedList_h
 #define LinkedList_h
 
 #include <stdio.h>
 #include <stdlib.h>
 
+/*
+ * The node struct contains a poiter to the next node, a stored data value, and a key value.
+ */
 typedef struct Node{
     struct Node* next;
     int key;
     int data;
 } Node;
 
+/*
+ * The linked list will hold onto a single head node that will hod onto the rest of the nodes.
+ */
 typedef struct LinkedList{
     struct Node* head;
 } LinkedList;

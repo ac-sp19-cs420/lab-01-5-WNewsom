@@ -9,7 +9,7 @@
 #include <stdio.h>
 #include "LinkedList.h"
 #include "Stack.h"
-
+#include "Queue.h"
 
 int main(int argc, const char * argv[]) {
     LinkedList*l = (LinkedList*)malloc(sizeof(LinkedList));
@@ -40,7 +40,7 @@ int main(int argc, const char * argv[]) {
     Stack* st = (Stack*)malloc(sizeof(Stack));
     st->link = NULL;
     
-    printf("Is stack st empty? %d.\n\n",is_stack_empty(st));
+    printf("Is stack empty? %d.\n\n",is_stack_empty(st));
     
     stack_push(st, 4);
     stack_push(st, 1);
@@ -51,8 +51,24 @@ int main(int argc, const char * argv[]) {
     printf("The next value on the stack is %d.\n\n",stack_top(st));
     print_stack(st);
     
-    printf("Is stack st empty? %d.\n\n",is_stack_empty(st));
+    printf("Is stack empty? %d.\n\n",is_stack_empty(st));
     
+    free_stack(st);
     
+    Queue* q = (Queue*)malloc(sizeof(Queue*));
+    q->link = NULL;
+    
+    printf("Is queue empty? %d.\n\n",is_empty_queue(q));
+    
+    queue_push(q, 4);
+    queue_push(q, 5);
+    queue_push(q, 2);
+    print_queue(q);
+    
+    printf("Is queue empty? %d.\n\n",is_empty_queue(q));
+
+    printf("The last of the queue is %d, and the value popped of of the queue is %d. They should be the same. That value is now removed.\n",queue_last(q), queue_pop(q));
+
+    free_queue(q);
     return 0;
 }
