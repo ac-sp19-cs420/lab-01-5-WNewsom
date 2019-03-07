@@ -19,7 +19,7 @@ int insert_into_List(LinkedList* l, int data, int key){
                 printf("Key Value exists in Linked List");
                 return 0;
             }
-            if (nextNode->key < key) {
+            if (nextNode->key > key) {
                 Node* insertNode = (Node*)malloc(sizeof(Node));
                 insertNode->data = data;
                 insertNode->key = key;
@@ -85,10 +85,21 @@ void print_list(LinkedList *l){
         printf("Node %d has data %d and a key of %d.\n", x,nextNode->data,nextNode->key);
         nextNode= nextNode->next;
     }
+    printf("\n");
 }
 
 int remove_from_list(LinkedList *l, int key){
-    
+    Node* nextNode = l->head->next;
+    Node* prevNode = l->head;
+    while (nextNode != NULL) {
+        if(nextNode->key == key){
+            prevNode->next =nextNode->next;
+            free(nextNode);
+            return 1;
+        }
+        prevNode = prevNode->next;
+        nextNode = nextNode->next;
+    }
     
     return 0;
 }
@@ -112,4 +123,15 @@ int* create_array(LinkedList *l){
     
     return array;
     
+}
+
+void free_nodes(LinkedList *l){
+    
+    while (l->head-> next != NULL) {
+        Node* tempNode = l->head->next;
+        l->head->next = tempNode->next;
+        free(tempNode);
+    }
+    free(l->head);
+    // Now free the list itself
 }

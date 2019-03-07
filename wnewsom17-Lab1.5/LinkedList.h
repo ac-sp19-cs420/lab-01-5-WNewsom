@@ -29,5 +29,6 @@ int remove_from_list(LinkedList *l, int key);
 void print_list(LinkedList *l);
 int* create_array(LinkedList *l);
 void  create_new_List(LinkedList* l, int data, int key);
+void free_nodes(LinkedList *l);
 
 #endif /* LinkedList_h */
