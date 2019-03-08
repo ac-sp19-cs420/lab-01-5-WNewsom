@@ -7,6 +7,7 @@
 //
 
 #include "LinkedList.h"
+#define MAX_ARRAY_SIZE 20
 
 /*
  * The insert into the list will handle the situations when a node is inserted into the list.
@@ -54,7 +55,7 @@ int insert_into_List(LinkedList* l, int data, int key){
     return 0;
 }
 /*
- *
+ * This method will test to see if a node with the given key is in the list.
  */
 int is_in_list(LinkedList *l, int key){
     Node* nextNode = l->head->next;
@@ -67,6 +68,9 @@ int is_in_list(LinkedList *l, int key){
     return 0;
 }
 
+/*
+ * This will return the data of the given node if the given key value is in the list
+ */
 int find(LinkedList* l, int key){
     Node* nextNode = l->head->next;
     while (nextNode != NULL) {
@@ -78,9 +82,12 @@ int find(LinkedList* l, int key){
     return 0;
 }
 
+/*
+ * This method will create the first node in the linked list.
+ */
 void create_new_List(LinkedList* l, int data, int key){
-    l->head = (Node*)malloc(sizeof(Node));
-    Node* nextNode=(Node*)malloc(sizeof(Node));
+    l->head = (Node*)malloc(sizeof(Node)); //allocating data for the head
+    Node* nextNode=(Node*)malloc(sizeof(Node)); //creating the next node after the head
     nextNode->data = data;
     nextNode->key = key;
     l->head->next = nextNode;
@@ -88,6 +95,9 @@ void create_new_List(LinkedList* l, int data, int key){
     
 }
 
+/*
+ * This method will print the list. It will give a the node's key and data values.
+ */
 void print_list(LinkedList *l){
     Node* nextNode = l->head->next;
     int x= 0;
@@ -99,12 +109,15 @@ void print_list(LinkedList *l){
     printf("\n");
 }
 
+/*
+ * This will remove a node with the key value from the list.
+ */
 int remove_from_list(LinkedList *l, int key){
     Node* nextNode = l->head->next;
     Node* prevNode = l->head;
     while (nextNode != NULL) {
         if(nextNode->key == key){
-            prevNode->next =nextNode->next;
+            prevNode->next =nextNode->next; //skips the deleted node
             free(nextNode);
             return 1;
         }
@@ -115,19 +128,17 @@ int remove_from_list(LinkedList *l, int key){
     return 0;
 }
 
+/*
+ * This method will return a int pointer to an array.
+ */
 int* create_array(LinkedList *l){
     Node* nextNode = l->head->next;
-    int x = 0;
-    
-    while (nextNode != NULL) {
-        x++;
-        nextNode = nextNode->next;
-    }
-    int array[x];
-    
+    static int array[MAX_ARRAY_SIZE]; //Will create an array of the max size
+   
+    nextNode = l->head->next;
     int i =0;
     while (nextNode != NULL) {
-        array[i] = nextNode->data;
+        array[i] = nextNode->data; // Writes to the array
         nextNode = nextNode->next;
         i++;
     }
@@ -136,13 +147,16 @@ int* create_array(LinkedList *l){
     
 }
 
+/*
+ * THis will free all of the nodes in the list
+ */
 void free_nodes(LinkedList *l){
-    
+    // frees all the nodes other than the head
     while (l->head-> next != NULL) {
         Node* tempNode = l->head->next;
         l->head->next = tempNode->next;
         free(tempNode);
     }
-    free(l->head);
+    free(l->head); // frees the head
     // Now free the list itself
 }

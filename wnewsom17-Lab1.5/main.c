@@ -11,7 +11,12 @@
 #include "Stack.h"
 #include "Queue.h"
 
+/*
+ * The main will test all 3 data structures
+ */
 int main(int argc, const char * argv[]) {
+   
+    // Testing the linked list
     LinkedList*l = (LinkedList*)malloc(sizeof(LinkedList));
     l->head = NULL;
     
@@ -33,10 +38,15 @@ int main(int argc, const char * argv[]) {
     printf("Is key of 3 in the list = %d \n", is_in_list(l, 3));
     printf("Data of key of 3 in the list = %d\n", find(l, 3));
     
+    for(int i = 0; i<3; i++){
+        printf("The index %d of the array has a value of %d \n", i, create_array(l)[i]);
+    }
+    
     free_nodes(l);
-    print_list(l);
+
     free(l);
     
+    // Testing the stack
     Stack* st = (Stack*)malloc(sizeof(Stack));
     st->link = NULL;
     
@@ -55,6 +65,7 @@ int main(int argc, const char * argv[]) {
     
     free_stack(st);
     
+    //Testing the queue
     Queue* q = (Queue*)malloc(sizeof(Queue*));
     q->link = NULL;
     
