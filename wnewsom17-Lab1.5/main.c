@@ -80,6 +80,7 @@ int main(int argc, const char * argv[]) {
 
     printf("The last of the queue is %d, and the value popped of of the queue is %d. They should be the same. That value is now removed.\n",queue_last(q), queue_pop(q));
 
+    print_queue(q);
     free_queue(q);
     return 0;
 }
